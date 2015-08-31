@@ -1,0 +1,6 @@
+framework module Pods_ExpertTech {
+  umbrella header "Pods-ExpertTech-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module APAvatarImageView {
+  umbrella header "Pods-ExpertTech-APAvatarImageView-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module DynamicColor {
+  umbrella header "Pods-ExpertTech-DynamicColor-umbrella.h"
+
+  export *
+  module * { export * }
+}

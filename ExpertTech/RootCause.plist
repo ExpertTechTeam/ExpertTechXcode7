@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>rootcause_id</key>
+		<integer>0</integer>
+		<key>rootcause_name</key>
+		<string>Wrong/Corrupt Firmware</string>
+	</dict>
+	<dict>
+		<key>rootcause_id</key>
+		<integer>1</integer>
+		<key>rootcause_name</key>
+		<string>Physically Damaged Unit</string>
+	</dict>
+	<dict>
+		<key>rootcause_id</key>
+		<integer>2</integer>
+		<key>rootcause_name</key>
+		<string>Low Signal Strength</string>
+	</dict>
+	<dict>
+		<key>rootcause_id</key>
+		<integer>3</integer>
+		<key>rootcause_name</key>
+		<string>Failed Power Supply</string>
+	</dict>
+    <dict>
+        <key>rootcause_id</key>
+        <integer>4</integer>
+        <key>rootcause_name</key>
+        <string>Damaged External Connection</string>
+    </dict>
+</array>
+</plist>
