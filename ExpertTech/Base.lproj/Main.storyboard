@@ -2694,7 +2694,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="FULLY EQUIPPED" id="9F6-3W-jjJ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qXJ-Pi-cQr" customClass="TechReportTableViewCell" customModule="ExpertTech" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qXJ-Pi-cQr" customClass="VehicleTableViewCell" customModule="ExpertTech" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="703" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qXJ-Pi-cQr" id="fW2-4u-baB">
@@ -2722,7 +2722,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="NEEDS EQUIPMENT" id="c4e-Gm-HIq">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="e3a-nz-6lz" customClass="TechReportTableViewCell" customModule="ExpertTech" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="e3a-nz-6lz" customClass="VehicleTableViewCell" customModule="ExpertTech" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="202" width="703" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e3a-nz-6lz" id="wfO-QL-Icn">
@@ -2748,7 +2748,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.1137254902" green="0.44705882349999998" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="AMp-N2-Qxp" customClass="TechReportTableViewCell" customModule="ExpertTech" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="AMp-N2-Qxp" customClass="VehicleTableViewCell" customModule="ExpertTech" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="242" width="703" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AMp-N2-Qxp" id="Ljd-Xs-ypv">
@@ -2774,7 +2774,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.1137254902" green="0.44705882349999998" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="rVQ-DM-92X" customClass="TechReportTableViewCell" customModule="ExpertTech" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="rVQ-DM-92X" customClass="VehicleTableViewCell" customModule="ExpertTech" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="282" width="703" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rVQ-DM-92X" id="dg7-71-ljd">
@@ -2800,7 +2800,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.1137254902" green="0.44705882349999998" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="FqL-9h-eje" customClass="TechReportTableViewCell" customModule="ExpertTech" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="FqL-9h-eje" customClass="VehicleTableViewCell" customModule="ExpertTech" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="322" width="703" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FqL-9h-eje" id="h8u-gd-cNu">

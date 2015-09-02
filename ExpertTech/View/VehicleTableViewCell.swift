@@ -1,14 +1,15 @@
 //
-//  TechReportTableViewCell.swift
+//  VehicleTableViewCell.swift
 //  ExpertTech
 //
-//  Created by Kewalin Sakawattananon on 8/23/2558 BE.
+//  Created by Kewalin Sakawattananon on 9/2/2558 BE.
 //  Copyright © 2558 IBM. All rights reserved.
 //
 
 import UIKit
 
-class TechReportTableViewCell: UITableViewCell {
+class VehicleTableViewCell: UITableViewCell {
+
     var width:CGFloat = 0
     
     override func awakeFromNib() {
@@ -20,15 +21,15 @@ class TechReportTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         let bgView = UIView()
-      /*  if selected == true {
+        if selected == true {
             bgView.backgroundColor = Constants.Color.Blue
             self.selectedBackgroundView = bgView
         }else{
             bgView.backgroundColor = UIColor.whiteColor()
             self.selectedBackgroundView = bgView
-        }*/
+        }
     }
-
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()
