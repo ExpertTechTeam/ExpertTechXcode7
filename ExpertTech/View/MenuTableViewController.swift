@@ -87,6 +87,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
         */
         let completedWorkOrder = self.openWorkOrderArrayList.objectAtIndex(self.indexNumber)
         self.openWorkOrderArrayList.removeObject(completedWorkOrder)
+        
         self.completedWorkOrderArrayList.addObject(completedWorkOrder)
         
         self.tableView.reloadData()
@@ -259,6 +260,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
             let producttype2 = (workOrder["WOO_PRODUCT_TYPE2"] as! String)
             cell.vOrderType1.text = "\(producttype1) \(producttype2)"
             cell.vOrderType2.text = workOrder["WOO_ORDER_NO"] as? String
+            cell.vTime.text = workOrder["WOO_TIME"] as? String
             cell.vSequence.text = String(indexPath.row + 1)
             return cell
         } else {
@@ -276,6 +278,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
                 let producttype2 = (workOrder["WOO_PRODUCT_TYPE2"] as? String)!
                 cell.vOrderType1.text = "\(producttype1) \(producttype2)"
                 cell.vOrderType2.text = workOrder["WOO_ORDER_NO"] as? String
+                cell.vTime.text = String(workOrder["WOO_DURATION"] as! NSDecimalNumber)
                 return cell
             }else{
                 let cell = UITableViewCell()
