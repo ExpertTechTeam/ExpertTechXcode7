@@ -12,7 +12,7 @@ import MapKit
 class DashboardViewController: UIViewController,MKMapViewDelegate, UIPopoverControllerDelegate{
     @IBOutlet weak var vMapView: MKMapView!
     let regionRadius: CLLocationDistance = 1000
-    var openWorkOrderArrayList:NSArray = NSArray()
+    var openWorkOrderList = [WorkOrder]()
     
     var vWorkUnit:String = ""
     override func viewDidLoad() {
@@ -65,12 +65,12 @@ class DashboardViewController: UIViewController,MKMapViewDelegate, UIPopoverCont
         
     }
     func pointMapOnLocation(){
-        print("Point Map on location : \(openWorkOrderArrayList.count)")
+        print("Point Map on location : \(openWorkOrderList.count)")
         var i:Int = 1
-        for workOrder in openWorkOrderArrayList{
-            let lat = Double(workOrder["WOO_LATITUDE"] as! String)!
-            let long = Double(workOrder["WOO_LONGITUDE"] as! String)!
-            let wooId = (workOrder["WOO_ID"] as? NSDecimalNumber)!
+        for workOrder:WorkOrder in openWorkOrderList{
+            let lat = Double(workOrder.woo_latitude)!
+            let long = Double(workOrder.woo_longitude)!
+            let wooId = workOrder.woo_id
             let location = CLLocation(latitude: lat, longitude: long)
             //print("\(lat), \(long)")
             let point:MKPointAnnotation = MKPointAnnotation()

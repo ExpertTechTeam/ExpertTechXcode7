@@ -27,6 +27,8 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
     var isSelectedVehicle:Bool = false
     var indexNumber:Int = 0
     var workOrderId:NSDecimalNumber = 0
+    var isCompletedWorkOrder: Bool = false
+    var durationStr : String = ""
     var hideMaster:Bool = false
     var startTime = NSTimeInterval()
     var timer:NSTimer = NSTimer()
@@ -40,11 +42,22 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.splitViewController?.delegate = self
-        self.vToolbar.setItems([vInstructionBarBtn,vExpertBarBtn,vVideoBarBtn,flexibleBarBtn,vDoneBarBtn,vStartBarBtn], animated: false)
-        self.vDoneBtn.hidden = true
-        self.vTimeCount.hidden = true
-        self.vSegmentControl.selectedSegmentIndex = 0
-        self.vStartBarBtn.enabled = isSelectedVehicle
+        print("IS COMPLETED WORK ORDER \(self.isCompletedWorkOrder)")
+        if isCompletedWorkOrder {
+            self.vToolbar.setItems([vInstructionBarBtn,vExpertBarBtn,vVideoBarBtn,flexibleBarBtn,vDoneBarBtn,vStartBarBtn], animated: false)
+            self.vDoneBtn.hidden = true
+            self.vTimeCount.hidden = false
+            self.vTimeCount.text = durationStr
+            self.vSegmentControl.selectedSegmentIndex = 0
+            self.vStartBarBtn.enabled = false
+        }else{
+            self.vToolbar.setItems([vInstructionBarBtn,vExpertBarBtn,vVideoBarBtn,flexibleBarBtn,vDoneBarBtn,vStartBarBtn], animated: false)
+            self.vDoneBtn.hidden = true
+            self.vTimeCount.hidden = true
+            self.vSegmentControl.selectedSegmentIndex = 0
+            self.vStartBarBtn.enabled = isSelectedVehicle
+        }
+        
         //self.onChangeSegment(vSegmentControl)
     }
     
@@ -62,25 +75,21 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
     @IBAction func onChangeSegment(sender: AnyObject) {
         switch vSegmentControl.selectedSegmentIndex {
             case 1 :
-                print("1")
                 self.vOverview.hidden = true
                 self.vLocation.hidden = false
                 self.vNotes.hidden = true
                 self.vInstructions.hidden = true
             case 2 :
-                print("2")
                 self.vOverview.hidden = true
                 self.vLocation.hidden = true
                 self.vNotes.hidden = false
                 self.vInstructions.hidden = true
             case 3 :
-                print("3")
                 self.vOverview.hidden = true
                 self.vLocation.hidden = true
                 self.vNotes.hidden = true
                 self.vInstructions.hidden = false
             default :
-                print("0")
                 self.vOverview.hidden = false
                 self.vLocation.hidden = true
                 self.vNotes.hidden = true
@@ -195,8 +204,6 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
             let controller = (segue.destinationViewController as! DetailWorkOrderTableViewController)
             controller.workOrderId = self.workOrderId
             controller.indexNumber = self.indexNumber
-            //controller.curWorkOrder = self.curWorkOrder
-            print("detailWorkOrderSegue")
         }
     }
     

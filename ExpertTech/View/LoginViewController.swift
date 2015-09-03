@@ -50,8 +50,7 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
- 
-        //authenticateUser()
+         //authenticateUser()
     }
     /*
     func authenticateUser() {

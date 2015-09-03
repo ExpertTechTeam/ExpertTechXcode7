@@ -16,12 +16,13 @@ struct Constants {
         static let toolbar_bg:UIColor = UIColor(hex: 0xf8f8f8)
         static let midnightblue:UIColor = UIColor(hex: 0x526e7f)
     }
+    /*
     struct WorkOrderList {
         static let workOrder1 = WorkOrder(woo_id: 0, woo_lat: "13.746203", woo_lng: "100.522836")
         static let workOrder2 = WorkOrder(woo_id: 1, woo_lat: "13.752036", woo_lng: "100.521985")
         static let workOrder3 = WorkOrder(woo_id: 2, woo_lat: "13.747647", woo_lng: "100.521483")
         static let workOrderList:[WorkOrder] = [workOrder1,workOrder2,workOrder3]
         
-    }
+    }*/
     
 }

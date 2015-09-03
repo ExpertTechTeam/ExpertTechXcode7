@@ -15,16 +15,12 @@ class PopOverDetailMapTableViewController: UITableViewController {
     @IBOutlet weak var vNavigationBar: UINavigationBar!
     var indexNumber:Int = 0
     var workOrderId:NSDecimalNumber = 0
-    var curWorkOrder : NSDictionary = NSDictionary()
     
     override func viewDidLoad() {
         print("Popover")
         super.viewDidLoad()
         self.vNavigationBar.barTintColor = Constants.Color.toolbar_bg
-            //Constants.Color.LightGray_BG
-        //self.vNavigationBar.tintColor = UIColor.blueColor()
-        self.vWorkOderNoBarBtn.tintColor = Constants.Color.midnightblue
-        //self.vWorkOderNoBarBtn.enabled = false
+        self.vWorkOderNoBarBtn.setTitleTextAttributes([NSForegroundColorAttributeName: Constants.Color.midnightblue] , forState: UIControlState.Normal)
         GetWorkOrderDetailByWorkUnitController().getFromSelectMap(workOrderId, uiView: self)
     }
     
@@ -56,11 +52,12 @@ class PopOverDetailMapTableViewController: UITableViewController {
         let workOrderDetailList = response
         print("Found the result from PopOverDetailMapTableViewController : \(response.count) item")
         if workOrderDetailList.count > 0 {
-            self.curWorkOrder = workOrderDetailList[0] as! NSDictionary
-            let custname = self.curWorkOrder["WOO_CUS_NAME"] as! String
-            let custaddress = self.curWorkOrder["WOO_CUS_ADDRESS"] as! String
-            let custservid = self.curWorkOrder["WOO_CUS_SERV_ID"] as! String
-            let custphoneno = self.curWorkOrder["WOO_ORDER_NO"] as! String
+            let curWorkOrderDict = workOrderDetailList[0] as! NSDictionary
+            let curWorkOrder:WorkOrder = WorkOrder(dict: curWorkOrderDict)
+            let custname = curWorkOrder.woo_cus_name
+            let custaddress = curWorkOrder.woo_cus_address
+            let custservid = curWorkOrder.woo_cus_serv_id
+            let custphoneno = curWorkOrder.woo_order_no
             self.vWorkOderNoBarBtn.title = "Work Order #\(custphoneno)"
             self.vCustomerDetailTxtView.text = "\(custname)\r\n\(custaddress)\r\n\(custservid)\r\n\(custphoneno)"
         }else{

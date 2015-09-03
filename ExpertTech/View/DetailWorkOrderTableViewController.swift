@@ -21,8 +21,7 @@ class DetailWorkOrderTableViewController: UITableViewController, MKMapViewDelega
     var indexNumber:Int = 0
     var workOrderId:NSDecimalNumber = 0
     //var workOrderList = Constants.WorkOrderList.workOrderList
-    //var curWorkOrder:WorkOrder!
-    var curWorkOrder:NSDictionary = NSDictionary()
+    var curWorkOrder:WorkOrder = WorkOrder()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.vMapView.delegate = self
@@ -43,8 +42,8 @@ class DetailWorkOrderTableViewController: UITableViewController, MKMapViewDelega
     }
     
     func centerAndPointOnLocation(){
-        let lat = Double(curWorkOrder["WOO_LATITUDE"] as! String)!
-        let long = Double(curWorkOrder["WOO_LONGITUDE"] as! String)!
+        let lat = Double(curWorkOrder.woo_latitude)!
+        let long = Double(curWorkOrder.woo_longitude)!
         let location = CLLocation(latitude: lat, longitude: long)
         print("\(lat), \(long)")
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
@@ -60,50 +59,51 @@ class DetailWorkOrderTableViewController: UITableViewController, MKMapViewDelega
         let workOrderDetailList = response
         print("Found the result from DtailWorkOrderTableViewController : \(response.count) item")
         if workOrderDetailList.count > 0 {
-            self.curWorkOrder = workOrderDetailList[0] as! NSDictionary
+            let curWorkOrderDict = workOrderDetailList[0] as! NSDictionary
+            self.curWorkOrder = WorkOrder(dict: curWorkOrderDict)
             // Customer Detail
-            let custname = self.curWorkOrder["WOO_CUS_NAME"] as! String
+            let custname = self.curWorkOrder.woo_cus_name
             // line 1
-            let custaddress = self.curWorkOrder["WOO_CUS_ADDRESS"] as! String
+            let custaddress = self.curWorkOrder.woo_cus_address
             // line 2
-            let custservid = self.curWorkOrder["WOO_CUS_SERV_ID"] as! String
+            let custservid = self.curWorkOrder.woo_cus_serv_id
             // line 3
-            let custphoneno = self.curWorkOrder["WOO_ORDER_NO"] as! String
+            let custphoneno = self.curWorkOrder.woo_order_no
             // line 4
-            let custexchange = self.curWorkOrder["WOO_EXCHANGE"] as! String
-            let custgis = self.curWorkOrder["WOO_GIS"] as! String
+            let custexchange = self.curWorkOrder.woo_exchange
+            let custgis = self.curWorkOrder.woo_gis
             // line 5
-            let custtie = self.curWorkOrder["WOO_TIE"] as! String
-            let custpri = self.curWorkOrder["WOO_PRI"] as! String
-            let custcab = self.curWorkOrder["WOO_CAB"] as! String
-            let custsec = self.curWorkOrder["WOO_SEC"] as! String
-            let custdp = self.curWorkOrder["WOO_DP"] as! String
-            let custpin = self.curWorkOrder["WOO_PIN"] as! String
-            let custdw = self.curWorkOrder["WOO_DW"] as! String
+            let custtie = self.curWorkOrder.woo_tie
+            let custpri = self.curWorkOrder.woo_pri
+            let custcab = self.curWorkOrder.woo_cab
+            let custsec = self.curWorkOrder.woo_sec
+            let custdp = self.curWorkOrder.woo_dp
+            let custpin = self.curWorkOrder.woo_pin
+            let custdw = self.curWorkOrder.woo_dw
             // line 6
-            let custadslinfo = self.curWorkOrder["WOO_ADSL_INFO"] as! String
-            let custadslsys = self.curWorkOrder["WOO_ADSL_SYSTEM"] as! String
-            let custadslnetwork = self.curWorkOrder["WOO_ADSL_NETWORK"] as! String
-            let custadslspeed = self.curWorkOrder["WOO_ADSL_SPEED"] as! String
-            let custrouterbrand = self.curWorkOrder["WOO_ROUTER_BRAND"] as! String
+            let custadslinfo = self.curWorkOrder.woo_adsl_info
+            let custadslsys = self.curWorkOrder.woo_adsl_system
+            let custadslnetwork = self.curWorkOrder.woo_adsl_network
+            let custadslspeed = self.curWorkOrder.woo_adsl_speed
+            let custrouterbrand = self.curWorkOrder.woo_router_brand
             // line 7
-            let custport = self.curWorkOrder["WOO_PORT"] as! String
-            let custmodembrand = self.curWorkOrder["WOO_MODEM_BRAND"] as! String
-            let custslotln = self.curWorkOrder["WOO_SLOTLN"] as! String
-            let custportln = self.curWorkOrder["WOO_PORTLN"] as! String
+            let custport = self.curWorkOrder.woo_port
+            let custmodembrand = self.curWorkOrder.woo_modem_brand
+            let custslotln = self.curWorkOrder.woo_slotln
+            let custportln = self.curWorkOrder.woo_portln
             
             
             // Request Detail
-            let requestproducttype1 = self.curWorkOrder["WOO_PRODUCT_TYPE1"] as! String
-            let requestproducttype2 = self.curWorkOrder["WOO_PRODUCT_TYPE2"] as! String
+            let requestproducttype1 = self.curWorkOrder.woo_product_type1
+            let requestproducttype2 = self.curWorkOrder.woo_product_type2
             
-            let requestreportdate = self.curWorkOrder["WOO_REPORT_DATE"] as! String
-            let requesttestresult = self.curWorkOrder["WOO_TEST_RESULT"] as! String
-            let requestfaultdesc = self.curWorkOrder["WOO_FAULT_DESC"] as! String
-            let requestnote = self.curWorkOrder["WOO_NOTE"] as! String
-            let requestreportedby = self.curWorkOrder["WOO_REPORTED_BY"] as! String
-            let requestcontact = self.curWorkOrder["WOO_CONTACT"] as! String
-            let requestdispatcher = self.curWorkOrder["WOO_DISPATCHER"] as! String
+            let requestreportdate = self.curWorkOrder.woo_report_date
+            let requesttestresult = self.curWorkOrder.woo_test_result
+            let requestfaultdesc = self.curWorkOrder.woo_fault_desc
+            let requestnote = self.curWorkOrder.woo_note
+            let requestreportedby = self.curWorkOrder.woo_reported_by
+            let requestcontact = self.curWorkOrder.woo_contact
+            let requestdispatcher = self.curWorkOrder.woo_dispatcher
             
             
             self.vCustomerNameLabel.text = "\(custname)"

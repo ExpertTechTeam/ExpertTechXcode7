@@ -25,6 +25,7 @@ class MainPageViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "sectionChangeMethod:", name: "sectionChange", object: nil)
         
         self.vTechnicianNameBarBtn.title = self.vTechnicianName
+        self.vTechnicianNameBarBtn.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()] , forState: UIControlState.Normal)
     }
 
     override func didReceiveMemoryWarning() {

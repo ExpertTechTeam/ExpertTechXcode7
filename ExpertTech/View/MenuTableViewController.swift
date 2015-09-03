@@ -12,15 +12,11 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
     var isSelectedFromMap:Bool = false
     var isCompletedWork:Bool = false
     var isSelectedVehicle:Bool = false
-   // var openWorkOrderList = Constants.WorkOrderList.workOrderList
-   // var completedWorkOrderList = [WorkOrder]()
     var indexNumber:Int = 0
-    var curWorkOrder:WorkOrder!
     var vWorkUnit:String = ""
-    
-    var openWorkOrderArrayList:NSMutableArray = NSMutableArray()
-    var completedWorkOrderArrayList:NSMutableArray = NSMutableArray()
-    var curWorkOrderDict:NSDictionary = NSDictionary()
+    var openWorkOrderList = [WorkOrder]()
+    var completedWorkOrderList = [WorkOrder]()
+    var curWorkOrder:WorkOrder = WorkOrder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +59,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
         }
         var duration = ""
         if let passedString : AnyObject = notif.userInfo?["duration"]{
-            duration = passedString as! String
+            duration = (passedString as! String).stringByReplacingOccurrencesOfString(":", withString: ".")
         }
         print("DURATION : \(duration)")
         
@@ -82,20 +78,12 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
         
         self.tableView.endUpdates()*/
         
-        // For test
-        /*
         let completedWorkOrder = self.openWorkOrderList[self.indexNumber]
         self.openWorkOrderList.removeAtIndex(self.indexNumber)
+        completedWorkOrder.woo_status_en = "complete"
+        completedWorkOrder.woo_duration = NSDecimalNumber(string: duration)
+        print("WOO_DURATION \(completedWorkOrder.woo_duration)")
         self.completedWorkOrderList.append(completedWorkOrder)
-        
-        self.tableView.reloadData()
-
-        */
-        let completedWorkOrder = self.openWorkOrderArrayList.objectAtIndex(self.indexNumber)
-        self.openWorkOrderArrayList.removeObject(completedWorkOrder)
-        //completedWorkOrder["WOO_DURATION"] = duration
-        self.completedWorkOrderArrayList.addObject(completedWorkOrder)
-        
         self.tableView.reloadData()
     }
     
@@ -117,21 +105,13 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // For test
-        /*
+
         if section == 0 {
             return 2
         }else if section == 1 {
-            return openWorkOrderList.count
-        }else{
-            return completedWorkOrderList.count > 0 ? completedWorkOrderList.count : 1
-        }*/
-        if section == 0 {
-            return 2
-        }else if section == 1 {
-            return openWorkOrderArrayList.count
+            return self.openWorkOrderList.count
         }else {
-             return completedWorkOrderArrayList.count > 0 ? completedWorkOrderArrayList.count : 1
+             return self.completedWorkOrderList.count > 0 ? self.completedWorkOrderList.count : 1
         }
     }
     
@@ -161,9 +141,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
                 if indexPath.row == indexNumber {
                     print("section == 1")
                     tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Top)
-                    // for test
-                    //self.curWorkOrder = self.openWorkOrderList[indexPath.row]
-                    self.curWorkOrderDict = self.openWorkOrderArrayList[indexPath.row] as! NSDictionary
+                    self.curWorkOrder = self.openWorkOrderList[indexPath.row]
                     performSegueWithIdentifier("workOrderSegue", sender: nil)
                     let dict: [String : AnyObject] = ["title" : "Expert Tech" as String]
                     NSNotificationCenter.defaultCenter().postNotificationName("sectionChange", object: nil, userInfo: dict)
@@ -172,10 +150,8 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
             if isCompletedWork {
                 if indexPath.row == 0 {
                     tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Top)
+                    self.curWorkOrder = self.openWorkOrderList[indexPath.row]
                     performSegueWithIdentifier("workOrderSegue", sender: nil)
-                    // for test
-                    //self.curWorkOrder = self.openWorkOrderList[indexPath.row]
-                    self.curWorkOrderDict = self.openWorkOrderArrayList[indexPath.row] as! NSDictionary
                     let dict: [String : AnyObject] = ["title" : "Expert Tech" as String]
                     NSNotificationCenter.defaultCenter().postNotificationName("sectionChange", object: nil, userInfo: dict)
                 }
@@ -199,20 +175,16 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
             }
         }else if indexPath.section == 1{
             self.indexNumber = indexPath.row
-            //self.workOrderId = Constants.WorkOrderList.workOrderList[indexPath.row].woo_id
-            // for test
-            //self.curWorkOrder = self.openWorkOrderList[indexPath.row]
-            self.curWorkOrderDict = self.openWorkOrderArrayList[indexPath.row] as! NSDictionary
-            performSegueWithIdentifier("workOrderSegue", sender: nil)
+            self.curWorkOrder = self.openWorkOrderList[indexPath.row]
+            performSegueWithIdentifier("workOrderSegue", sender: false)
+            
             let dict: [String : AnyObject] = ["title" : "Expert Tech" as String]
             NSNotificationCenter.defaultCenter().postNotificationName("sectionChange", object: nil, userInfo: dict)
         }else if indexPath.section == 2{
             self.indexNumber = indexPath.row
-            //self.workOrderId = Constants.WorkOrderList.workOrderList[indexPath.row].woo_id
-            //for test
-            //self.curWorkOrder = self.completedWorkOrderList[indexPath.row]
-            self.curWorkOrderDict = self.completedWorkOrderArrayList[indexPath.row] as! NSDictionary
-            performSegueWithIdentifier("workOrderSegue", sender: nil)
+            print("INDEX PATH SELECTED : 2")
+            self.curWorkOrder = self.completedWorkOrderList[indexPath.row]
+            performSegueWithIdentifier("workOrderSegue", sender: true)
             let dict: [String : AnyObject] = ["title" : "Expert Tech" as String]
             NSNotificationCenter.defaultCenter().postNotificationName("sectionChange", object: nil, userInfo: dict)
         }
@@ -255,23 +227,20 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
             return cell
         }else if indexPath.section == 1{
             let cell = tableView.dequeueReusableCellWithIdentifier("openWorkOrderCell", forIndexPath: indexPath) as! OpenWorkOrderTableViewCell
-            // for test
-            /*
-            let workOrder = openWorkOrderList[indexPath.row]
-            cell.vOrderType1.text = workOrder.woo_latitude
-            cell.vOrderType2.text = workOrder.woo_longitude
-            */
-            let workOrder = openWorkOrderArrayList[indexPath.row] as! NSDictionary
-            let producttype1 = (workOrder["WOO_PRODUCT_TYPE1"] as! String)
-            let producttype2 = (workOrder["WOO_PRODUCT_TYPE2"] as! String)
-            cell.vOrderType1.text = "\(producttype1) \(producttype2)"
-            cell.vOrderType2.text = workOrder["WOO_ORDER_NO"] as? String
             
-            let date:String = (workOrder["WOO_WORKING_DATE"] as? String)!
+            let workOrder = openWorkOrderList[indexPath.row]
+            let producttype1 = workOrder.woo_product_type1
+            let producttype2 = workOrder.woo_product_type2
+            cell.vOrderType1.text = "\(producttype1) \(producttype2)"
+            cell.vOrderType2.text = workOrder.woo_order_no
+            
+            let date:String = workOrder.woo_working_date
             let dateFormatterToDate = NSDateFormatter()
-            dateFormatterToDate.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatterToDate.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
             let dateWithFormat = dateFormatterToDate.dateFromString(date)
+            print("DATE \(dateWithFormat!)")
             let dateFormatterToString = NSDateFormatter();
+            dateFormatterToString.timeZone = NSTimeZone(abbreviation: "UTC")
             dateFormatterToString.dateFormat = "HH:mm a";
             let strDateWithFormat = dateFormatterToString.stringFromDate(dateWithFormat!);
             cell.vTime.text = strDateWithFormat
@@ -279,21 +248,22 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
             cell.vSequence.text = String(indexPath.row + 1)
             return cell
         } else {
-           // if completedWorkOrderList.count > 0 {
-            if completedWorkOrderArrayList.count > 0 {
+            if completedWorkOrderList.count > 0 {
                 let cell = tableView.dequeueReusableCellWithIdentifier("completedWorkOrderCell", forIndexPath: indexPath) as! CompletedWorkOrderTableViewCell
-                //for test
-                /*
                 let workOrder = completedWorkOrderList[indexPath.row]
-                cell.vOrderType1.text = workOrder.woo_latitude
-                cell.vOrderType2.text = workOrder.woo_longitude
-                */
-                let workOrder = completedWorkOrderArrayList[indexPath.row] as! NSDictionary
-                let producttype1 = (workOrder["WOO_PRODUCT_TYPE1"] as? String)!
-                let producttype2 = (workOrder["WOO_PRODUCT_TYPE2"] as? String)!
+                let producttype1 = (workOrder.woo_product_type1 as String)
+                let producttype2 = (workOrder.woo_product_type2 as String)
                 cell.vOrderType1.text = "\(producttype1) \(producttype2)"
-                cell.vOrderType2.text = workOrder["WOO_ORDER_NO"] as? String
-                cell.vTime.text = String(format: "%.2f", (workOrder["WOO_DURATION"] as? NSDecimalNumber)!)
+                cell.vOrderType2.text = workOrder.woo_order_no as String
+                //print("Complete duration \(workOrder.woo_duration)")
+                //cell.vTime.text = NSString(format: "%.02f", 5) as String
+                cell.vTime.text = String(workOrder.woo_duration)
+                /*cell.vTime.text = String(workOrder.woo_duration)
+                let formatter = NSNumberFormatter()
+                formatter.positiveFormat = "00:00"
+                let formattedString = formatter.stringFromNumber(workOrder.woo_duration)!
+                    .stringByReplacingOccurrencesOfString(":00", withString: "")
+                cell.vTime.text = formattedString*/
                 return cell
             }else{
                 let cell = UITableViewCell()
@@ -312,18 +282,19 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "workOrderSegue"{
             print("Open work order segue")
+            
             let controller:DetailWorkOrderViewController = segue.destinationViewController as! DetailWorkOrderViewController
-            controller.workOrderId = self.curWorkOrderDict["WOO_ID"] as! NSDecimalNumber
+            controller.workOrderId = self.curWorkOrder.woo_id
             controller.indexNumber = self.indexNumber
-            controller.curWorkOrder = self.curWorkOrder
             controller.isSelectedVehicle = self.isSelectedVehicle
-            //var indexPath = self.tableview.indexPathForSelectedRow() //get index of data for selected row
-            //secondViewController.data = self.dataArray.objectAtIndex(indexPath.row) // get data by index and pass it to second view controller
+            controller.isCompletedWorkOrder = self.curWorkOrder.woo_status_en.lowercaseString == "open" ? false : true
+            controller.durationStr = String(self.curWorkOrder.woo_duration)
+            
         }else if segue.identifier == "overViewSegue"{
             print("Over view segue")
             let controller:DashboardViewController = segue.destinationViewController as! DashboardViewController
             controller.vWorkUnit = self.vWorkUnit
-            controller.openWorkOrderArrayList = self.openWorkOrderArrayList
+            controller.openWorkOrderList = self.openWorkOrderList
             
         }else{
             print("Vehicle segue")
@@ -337,7 +308,14 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
         let workOrderListResult = response
         print("Found the result from MenuTableViewController : \(response.count) item")
         if workOrderListResult.count > 0 {
-            self.openWorkOrderArrayList = workOrderListResult as! NSMutableArray
+            for item in workOrderListResult {
+                let workOrder = WorkOrder(dict: item as! NSDictionary)
+                if workOrder.woo_status_en.lowercaseString == "open" {
+                    self.openWorkOrderList.append(workOrder)
+                }else{
+                    self.completedWorkOrderList.append(workOrder)
+                }
+            }
             self.tableView.reloadData()
         }else{
            
