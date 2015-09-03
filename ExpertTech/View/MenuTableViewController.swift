@@ -61,6 +61,12 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
         if let passedInt: AnyObject = notif.userInfo?["indexNumber"] {
             self.indexNumber = passedInt as! Int
         }
+        var duration = ""
+        if let passedString : AnyObject = notif.userInfo?["duration"]{
+            duration = passedString as! String
+        }
+        print("DURATION : \(duration)")
+        
         let animations1: () -> Void = {
             self.splitViewController?.preferredDisplayMode = .Automatic
             self.splitViewController?.viewWillLayoutSubviews()
@@ -87,7 +93,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
         */
         let completedWorkOrder = self.openWorkOrderArrayList.objectAtIndex(self.indexNumber)
         self.openWorkOrderArrayList.removeObject(completedWorkOrder)
-        
+        //completedWorkOrder["WOO_DURATION"] = duration
         self.completedWorkOrderArrayList.addObject(completedWorkOrder)
         
         self.tableView.reloadData()
@@ -260,7 +266,16 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
             let producttype2 = (workOrder["WOO_PRODUCT_TYPE2"] as! String)
             cell.vOrderType1.text = "\(producttype1) \(producttype2)"
             cell.vOrderType2.text = workOrder["WOO_ORDER_NO"] as? String
-            cell.vTime.text = workOrder["WOO_TIME"] as? String
+            
+            let date:String = (workOrder["WOO_WORKING_DATE"] as? String)!
+            let dateFormatterToDate = NSDateFormatter()
+            dateFormatterToDate.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let dateWithFormat = dateFormatterToDate.dateFromString(date)
+            let dateFormatterToString = NSDateFormatter();
+            dateFormatterToString.dateFormat = "HH:mm a";
+            let strDateWithFormat = dateFormatterToString.stringFromDate(dateWithFormat!);
+            cell.vTime.text = strDateWithFormat
+            
             cell.vSequence.text = String(indexPath.row + 1)
             return cell
         } else {
@@ -278,7 +293,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
                 let producttype2 = (workOrder["WOO_PRODUCT_TYPE2"] as? String)!
                 cell.vOrderType1.text = "\(producttype1) \(producttype2)"
                 cell.vOrderType2.text = workOrder["WOO_ORDER_NO"] as? String
-                cell.vTime.text = String(workOrder["WOO_DURATION"] as! NSDecimalNumber)
+                cell.vTime.text = String(format: "%.2f", (workOrder["WOO_DURATION"] as? NSDecimalNumber)!)
                 return cell
             }else{
                 let cell = UITableViewCell()
@@ -313,6 +328,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
         }else{
             print("Vehicle segue")
              let controller:VehicleTableViewController = segue.destinationViewController as! VehicleTableViewController
+            controller.isSelectedVehicle = isSelectedVehicle
             controller.delegate = self
         }
     }

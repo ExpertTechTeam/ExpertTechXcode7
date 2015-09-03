@@ -13,7 +13,8 @@ public class WorkOrder {
     var woo_id          : Int = 0
     var woo_workunit    : String = ""
     var woo_sequence    : Int = 0
-    var woo_wos         : WorkOrderStatus = WorkOrderStatus()
+    var woo_status_en   : String = ""
+    var woo_status_th   : String = ""
     var woo_product_type : String = ""
     var woo_order_no    : String = ""
     var woo_cus_name    : String = ""
@@ -47,6 +48,7 @@ public class WorkOrder {
     var woo_portln      : String = ""
     var woo_exchange    : String = ""
     var woo_duration    : NSDecimalNumber = 0
+    var woo_working_date : String = ""
     
     init (woo_id:Int,woo_lat:String,woo_lng:String){
         self.woo_id = woo_id

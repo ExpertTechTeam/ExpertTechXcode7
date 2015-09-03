@@ -181,7 +181,7 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
     @IBAction func completedWorkOrder(segue:UIStoryboardSegue){
         print("completed work order")
         stopCount()
-        let dict: [String : AnyObject] = ["indexNumber" : indexNumber]
+        let dict: [String : AnyObject] = ["indexNumber" : indexNumber, "duration" : "\(self.strMinutes):\(self.strSeconds)"]
         NSNotificationCenter.defaultCenter().postNotificationName("completedWorkOrder", object: nil, userInfo: dict)
     }
     
