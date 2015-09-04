@@ -44,6 +44,12 @@ class MainPageViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "sectionChange", object:nil)
     }
     
+    @IBAction func signOut(){
+        let appDomain = NSBundle.mainBundle().bundleIdentifier
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "splitViewSegue"{
             let splitViewMainPageVC = segue.destinationViewController as! UISplitViewController

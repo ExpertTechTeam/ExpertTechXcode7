@@ -28,7 +28,7 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
     var indexNumber:Int = 0
     var workOrderId:NSDecimalNumber = 0
     var isCompletedWorkOrder: Bool = false
-    var durationStr : String = ""
+    var workOrderDuration : NSDecimalNumber = 0
     var hideMaster:Bool = false
     var startTime = NSTimeInterval()
     var timer:NSTimer = NSTimer()
@@ -47,7 +47,11 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
             self.vToolbar.setItems([vInstructionBarBtn,vExpertBarBtn,vVideoBarBtn,flexibleBarBtn,vDoneBarBtn,vStartBarBtn], animated: false)
             self.vDoneBtn.hidden = true
             self.vTimeCount.hidden = false
-            self.vTimeCount.text = durationStr
+            let durationStr = String(format:"%.2f", workOrderDuration.floatValue)
+            let durationArr = durationStr.componentsSeparatedByString(".")
+            let durationMin: String = String(format: "%02d", Int(durationArr[0])!)
+            let durationSec: String = durationArr[1]
+            self.vTimeCount.text = "\(durationMin):\(durationSec)"
             self.vSegmentControl.selectedSegmentIndex = 0
             self.vStartBarBtn.enabled = false
         }else{
@@ -58,7 +62,6 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
             self.vStartBarBtn.enabled = isSelectedVehicle
         }
         
-        //self.onChangeSegment(vSegmentControl)
     }
     
     override func didReceiveMemoryWarning() {

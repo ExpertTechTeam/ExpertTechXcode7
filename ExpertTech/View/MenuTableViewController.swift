@@ -255,15 +255,12 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
                 let producttype2 = (workOrder.woo_product_type2 as String)
                 cell.vOrderType1.text = "\(producttype1) \(producttype2)"
                 cell.vOrderType2.text = workOrder.woo_order_no as String
-                //print("Complete duration \(workOrder.woo_duration)")
-                //cell.vTime.text = NSString(format: "%.02f", 5) as String
-                cell.vTime.text = String(workOrder.woo_duration)
-                /*cell.vTime.text = String(workOrder.woo_duration)
-                let formatter = NSNumberFormatter()
-                formatter.positiveFormat = "00:00"
-                let formattedString = formatter.stringFromNumber(workOrder.woo_duration)!
-                    .stringByReplacingOccurrencesOfString(":00", withString: "")
-                cell.vTime.text = formattedString*/
+                let durationStr = String(format:"%.2f", workOrder.woo_duration.floatValue)
+                let durationArr = durationStr.componentsSeparatedByString(".")
+                let durationMin: String = String(format: "%02d", Int(durationArr[0])!)
+                let durationSec: String = durationArr[1]
+                cell.vTime.text = "\(durationMin):\(durationSec)"
+                
                 return cell
             }else{
                 let cell = UITableViewCell()
@@ -288,7 +285,7 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
             controller.indexNumber = self.indexNumber
             controller.isSelectedVehicle = self.isSelectedVehicle
             controller.isCompletedWorkOrder = self.curWorkOrder.woo_status_en.lowercaseString == "open" ? false : true
-            controller.durationStr = String(self.curWorkOrder.woo_duration)
+            controller.workOrderDuration = self.curWorkOrder.woo_duration
             
         }else if segue.identifier == "overViewSegue"{
             print("Over view segue")

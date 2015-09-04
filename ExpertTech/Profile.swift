@@ -23,9 +23,7 @@ public class Profile{
         self.pro_fname = dict["PRO_FNAME"] as! String
         self.pro_lname = dict["PRO_LNAME"] as! String
         self.pro_username = dict["PRO_USERNAME"] as! String
-        self.pro_password = dict["PRO_PASSWORD"] as! String
         self.pro_workunit = dict["PRO_WORKUNIT"] as! String
-        self.pro_created_date = dict["PRO_CREATED_DATE"] as! String
     }
     
     

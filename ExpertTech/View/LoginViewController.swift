@@ -29,6 +29,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var vPasswordTxtField: UITextField!
     
     var loginResult : NSArray = []
+    
+    var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()        // Do any additional setup after loading the view.
@@ -41,7 +43,8 @@ class LoginViewController: UIViewController {
         self.vUsernameTxtField.leftViewMode = UITextFieldViewMode.Always
         self.vPasswordTxtField.leftView = UIView(frame: CGRectMake(0, 0, 10, 20))
         self.vPasswordTxtField.leftViewMode = UITextFieldViewMode.Always
-        
+        self.vUsernameTxtField!.text = ""
+        self.vPasswordTxtField!.text = ""
         
         //Test WL Connection
 //        LoginController().login("t10001", password: "passw0rd", uiView: self)
@@ -141,12 +144,19 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "loginSegue"{
             let item = sender as! NSDictionary
-            let id: Int = item["PRO_ID"] as! Int
-            let fname: String = item["PRO_FNAME"] as! String
-            let lname: String = item["PRO_LNAME"] as! String
-            let workunit: String = item["PRO_WORKUNIT"] as! String
+            let user = Profile(dict: item)
             
-            print("ID:         \(id)")
+            prefs.setObject(user.pro_username, forKey: "USERNAME")
+            prefs.setObject("\(user.pro_fname) \(user.pro_lname)", forKey: "NAME")
+            prefs.setObject(user.pro_workunit, forKey: "WORKUNIT")
+            prefs.setInteger(1, forKey: "ISLOGGEDIN")
+            prefs.setBool(true, forKey: "AUTHEN")
+            prefs.synchronize()
+            
+            let fname: String = user.pro_fname
+            let lname: String = user.pro_lname
+            let workunit: String = user.pro_workunit
+            
             print("FIRST NAME: \(fname)")
             print("LAST NAME:  \(lname)")
             print("WORK UNIT:  \(workunit)")

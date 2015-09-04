@@ -116,6 +116,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Sign Out" id="txO-d4-clw">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
+                                <action selector="signOut" destination="tSH-Ou-ckW" id="75y-CO-skX"/>
                                 <segue destination="8B3-4B-wAI" kind="unwind" unwindAction="logout:" id="xQn-RL-8hR"/>
                             </connections>
                         </barButtonItem>
