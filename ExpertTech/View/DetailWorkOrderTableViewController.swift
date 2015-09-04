@@ -20,7 +20,6 @@ class DetailWorkOrderTableViewController: UITableViewController, MKMapViewDelega
     let regionRadius: CLLocationDistance = 1000
     var indexNumber:Int = 0
     var workOrderId:NSDecimalNumber = 0
-    //var workOrderList = Constants.WorkOrderList.workOrderList
     var curWorkOrder:WorkOrder = WorkOrder()
     override func viewDidLoad() {
         super.viewDidLoad()

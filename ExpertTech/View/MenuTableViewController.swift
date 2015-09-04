@@ -94,7 +94,6 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
     
     // MARK: - Communicate
     func backFromVehicle() {
-        print("BACK FROM VEHICLE")
         self.isSelectedVehicle = true
         self.tableView.reloadData()
     }
@@ -279,7 +278,6 @@ class MenuTableViewController: UITableViewController, UISplitViewControllerDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "workOrderSegue"{
             print("Open work order segue")
-            
             let controller:DetailWorkOrderViewController = segue.destinationViewController as! DetailWorkOrderViewController
             controller.workOrderId = self.curWorkOrder.woo_id
             controller.indexNumber = self.indexNumber

@@ -132,24 +132,6 @@ class DetailWorkOrderViewController: UIViewController, UISplitViewControllerDele
         }
         
     }
-    
-    /*
-    @IBAction func startWork() {
-        self.startCount()
-        self.vTimeCount.hidden = false
-        self.vStartButton.hidden = true
-        self.hideMaster = !self.hideMaster
-        let spv:UISplitViewController = self.splitViewController!
-        spv.view.setNeedsLayout()
-        spv.delegate = nil;
-        spv.delegate = self;
-    //  spv.willRotateToInterfaceOrientation(self.interfaceOrientation, duration: 2000)
-    }
-    @IBAction func stopWork(sender:AnyObject?){
-        self.stopCount()
-    
-    }
-    */
     func startCount(){
         if (!timer.valid) {
             let aSelector : Selector = "updateTime"

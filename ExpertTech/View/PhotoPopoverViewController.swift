@@ -85,9 +85,6 @@ class PhotoPopoverViewController: UIViewController, UICollectionViewDelegate, UI
                     
                     // Add the returned image to your array
                     self.images.addObject(image!)
-                    //let curImage:UIImage = image!
-                    //curImage.images.
-                    
                     
                     // If you haven't already reached the first
                     // index of the fetch result and if you haven't
@@ -103,21 +100,9 @@ class PhotoPopoverViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 })
             }
-
-//}
-       // PHPhotoLibrary authorizationStatus] – if not set, it will return PHAuthorizationStatusNotDetermined
-        // Sort the images by creation date
-        
+  
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

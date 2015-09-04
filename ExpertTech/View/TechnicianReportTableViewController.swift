@@ -68,7 +68,6 @@ class TechnicianReportTableViewController: UITableViewController, communicationC
             let workOrderRootCauseVC = navWorkOrderRootCauseVC.topViewController as! RootCauseTableViewController
             workOrderRootCauseVC.delegate = self
         }else if segue.identifier == "photoSegue" {
-            //let photoVC = segue.destinationViewController as! PhotoPopoverViewController
 
         }
         

@@ -43,17 +43,13 @@ class LoginViewController: UIViewController {
         self.vUsernameTxtField.leftViewMode = UITextFieldViewMode.Always
         self.vPasswordTxtField.leftView = UIView(frame: CGRectMake(0, 0, 10, 20))
         self.vPasswordTxtField.leftViewMode = UITextFieldViewMode.Always
-        self.vUsernameTxtField!.text = ""
-        self.vPasswordTxtField!.text = ""
-        
-        //Test WL Connection
-//        LoginController().login("t10001", password: "passw0rd", uiView: self)
-        //InsertCustFeedbackController().insert("4 PTW11221042", workOrderId: 10001, timeless: 8, helpful: 7, quantity: 6, commu: 5, overall: 7, createdDate: "2015-08-22 11:00:00")
 
     }
     
     override func viewDidAppear(animated: Bool) {
          //authenticateUser()
+        self.vUsernameTxtField.text = ""
+        self.vPasswordTxtField.text = ""
     }
     /*
     func authenticateUser() {
